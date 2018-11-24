@@ -219,7 +219,7 @@ fi
 sleep 5
 
 #fetching post install
-curl "https://raw.githubusercontent.com/hetzneronline/installimage/master/post-install/proxmox5" --output /post-install
+curl "https://github.com/hetzneronline/installimage/blob/master/post-install/proxmox5" --output /post-install
 
 #Customising post install file
 echo "wget https://raw.githubusercontent.com/masterhash-us/xshok-proxmox/master/install-post.sh -c -O install-post.sh && bash install-post.sh && rm install-post.sh" >> /post-install
