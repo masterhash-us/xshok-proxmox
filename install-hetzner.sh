@@ -219,7 +219,7 @@ fi
 sleep 5
 
 #fetching post install
-curl "https://github.com/hetzneronline/installimage/blob/master/post-install/proxmox5" --output /post-install
+curl "https://raw.githubusercontent.com/hetzneronline/installimage/master/post-install/proxmox5" --output /post-install
 
 #Customising post install file
 echo "wget https://raw.githubusercontent.com/masterhash-us/xshok-proxmox/master/install-post.sh -c -O install-post.sh && bash install-post.sh && rm install-post.sh" >> /post-install
@@ -228,9 +228,6 @@ if grep -q '#!/usr/bin/env bash' "/post-install"; then
   chmod 777 /post-install
   echo "Starting Installer"
 
-  if [ "$USE_LVM" == "TRUE" ]; then
-    $installimage_bin -a -i "root/images/Debian-94-stretch-64-minimal.tar.gz" -g -s en -x /post-install -n "${MY_HOSTNAME}" -b grub -d "nvme0n1${MY_RAID_SLAVE}" -r "${MY_RAID_ENABLE}" -l "${MY_RAID_LEVEL}" -p "/:ext4:${MY_ROOT}G${MY_SWAP}${MY_CACHE}${MY_SLOG},lvm:vg0:all" -v "vg0:data:/var/lib/vz:xfs:all"
-  else
     $installimage_bin -a -i "root/images/Debian-94-stretch-64-minimal.tar.gz" -g -s en -x /post-install -n "${MY_HOSTNAME}" -b grub -d "nvme0n1${MY_RAID_SLAVE}" -r "${MY_RAID_ENABLE}" -l "${MY_RAID_LEVEL}" -p "/:ext4:${MY_ROOT}G${MY_SWAP}${MY_CACHE}${MY_SLOG},/var/lib/vz:xfs:all"
   fi
 
